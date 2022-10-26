@@ -1,0 +1,29 @@
+h1 {
+  color: blue;
+}
+
+.home-summary-container {
+  height: 200px;
+  background-color: #6379f4;
+  border-radius: 25px;
+}
+
+.balance-container {
+  height: inherit;
+}
+
+.summary-button {
+  border-color: white;
+  border-radius: 5px;
+  height: inherit;
+}
+
+/* Footer */
+.footer-container {
+  height: 60px;
+  background-color: #6379f4;
+}
+
+.tes {
+  background-color: black;
+}
