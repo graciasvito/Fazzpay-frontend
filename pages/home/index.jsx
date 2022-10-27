@@ -29,7 +29,7 @@ export default function Home() {
           <div className="container text-white balance-container d-flex flex-column justify-content-around">
             <p>Balance</p>
             <h2 className="fw-bold">Rp120.000</h2>
-            <p>+62812345678</p>
+            <p>+62 812-3456-1278</p>
           </div>
           <div className="summary-button d-flex align-items-center">
             <div>
