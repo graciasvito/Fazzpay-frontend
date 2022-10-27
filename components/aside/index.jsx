@@ -1,14 +1,25 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 
 export default function Aside() {
+  const Router = useRouter();
+
+  const handleDashboard = () => {
+    Router.push("/home");
+  };
+
+  const handleTransfer = () => {
+    Router.push("/transfer/search");
+  };
+
   return (
     <aside className="aside-container d-flex flex-column justify-content-around ">
       <div className=" ms-lg-4">
-        <div className="d-flex">
+        <a className="d-flex" onClick={handleDashboard}>
           <div style={{ width: 30, height: 30 }}>
             <Image
-              src="/dashboard.svg"
+              src="/dashboard.png"
               width={30}
               height={30}
               layout="responsive"
@@ -16,8 +27,8 @@ export default function Aside() {
             />
           </div>
           <p className="mt-1 ms-3">Dashboard</p>
-        </div>
-        <div className="d-flex mt-lg-4">
+        </a>
+        <a className="d-flex mt-lg-4" onClick={handleTransfer}>
           <div style={{ width: 30, height: 30 }}>
             <Image
               src="/arrow-up.svg"
@@ -28,7 +39,7 @@ export default function Aside() {
             />
           </div>
           <p className="mt-1 ms-3">Transfer</p>
-        </div>
+        </a>
         <div className="d-flex mt-lg-4">
           <div style={{ width: 30, height: 30 }}>
             <Image

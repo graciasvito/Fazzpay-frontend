@@ -84,7 +84,7 @@ export default function Login() {
               </div>
             </span>
             <input
-              type="text"
+              type="email"
               placeholder="Enter your email"
               name="email"
               onChange={handleChangeText}

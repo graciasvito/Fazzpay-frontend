@@ -1,19 +1,19 @@
 import React from "react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
-  // const router = useRouter();
-  // const handleLogout = () => {
-  //   router.push("/");
-  // };
+  const router = useRouter();
+  const handleHome = () => {
+    router.push("/home");
+  };
 
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand fw-bold text-primary" href="#">
+          <a class="navbar-brand fw-bold text-primary" onClick={handleHome}>
             FazzPay
           </a>
 

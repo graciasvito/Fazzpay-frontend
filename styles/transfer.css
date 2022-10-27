@@ -1,0 +1,12 @@
+.transfer-input-container {
+  border: 1px solid #a9a9a9;
+  border-radius: 10px;
+  width: 700px;
+  height: 50px;
+}
+
+.transfer-input-container input {
+  width: 700px;
+  border: none;
+  border-radius: 10px;
+}
