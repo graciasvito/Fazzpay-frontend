@@ -3,23 +3,34 @@ import React, { useEffect, useState } from "react";
 import Layout from "layout";
 import axiosClient from "utils/axios";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [data, setData] = useState([]);
 
+  const userId = Cookies.get("userId");
+
   useEffect(() => {
-    getDataUser();
+    getDataUserById();
   }, []);
 
-  const getDataUser = async () => {
+  // const getDataUser = async () => {
+  //   try {
+  //     const result = await axiosClient.get(
+  //       "/user?page=1&limit=50&search=&sort=firstName ASC"
+  //     );
+  //     setData(result.data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const getDataUserById = async () => {
     try {
-      const result = await axiosClient.get(
-        "/user?page=1&limit=50&search=&sort=firstName ASC"
-      );
+      const result = await axiosClient.get(`user/profile/${userId}`);
       setData(result.data.data);
-    } catch (error) {
-      console.log(error);
-    }
+      // setData(result)
+    } catch (error) {}
   };
 
   return (
@@ -28,7 +39,7 @@ export default function Home() {
         <div className="home-summary-container container d-flex">
           <div className="container text-white balance-container d-flex flex-column justify-content-around">
             <p>Balance</p>
-            <h2 className="fw-bold">Rp120.000</h2>
+            <h2 className="fw-bold">Rp{data.balance}</h2>
             <p>+62 812-3456-1278</p>
           </div>
           <div className="summary-button d-flex align-items-center">

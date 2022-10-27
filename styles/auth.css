@@ -1,0 +1,45 @@
+/* LOGIN */
+
+.login-headline {
+  margin-top: 100px;
+}
+.login-headline h6 {
+  font-size: 21px;
+}
+
+.right-container {
+  width: 350px;
+  /* height: 100px; */
+  margin-left: 50px;
+}
+
+.right-container p {
+  font-size: 14px;
+}
+
+.auth-input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+  outline: none;
+  width: 300px;
+}
+
+.auth-input-container input {
+  border: 0;
+}
+
+/* SIGN UP */
+
+.signup-input-container {
+  border: 1px solid #a9a9a9;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.signup-input-container input {
+  width: 350px;
+  border: none;
+}

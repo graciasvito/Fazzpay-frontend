@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axiosClient from "utils/axios";
 import LayoutAuth from "layout/auth";
 
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -12,23 +11,21 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const userId = Cookies.get("userId");
-
   const handleSubmit = async () => {
     try {
-      const result = await axiosClient.post("/auth/login", form);
-      Cookies.set("token", result.data.data.token);
-      Cookies.set("userId", result.data.data.id);
+      const result = await axiosClient.post("/auth/register", form);
+
       alert(result.data.msg);
 
       //   proses kondisi pengecekan pin jika ada akan diarahkan ke home jika tidak ada akan diarahkan ke create pin
-      router.push("/home");
+      router.push("/login");
     } catch (error) {
-      alert(error.response.data.msg);
+      console.log(error);
     }
   };
 
   const handleChangeText = (e) => {
+    console.log(e);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -38,7 +35,7 @@ export default function Login() {
 
   return (
     <div className="d-flex">
-      <LayoutAuth title="Login" />
+      <LayoutAuth title="Sign Up" />
       <div className="right-container">
         <div className="login-headline">
           <h6 className="fw-bold">
@@ -53,78 +50,84 @@ export default function Login() {
             that for you!
           </p>
         </div>
-        <form>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">
-              <div style={{ width: 25, height: 25 }}>
-                <Image
-                  src="/mail.svg"
-                  width={25}
-                  height={25}
-                  layout="responsive"
-                  alt="profile picture"
-                />
+        <form className="mt-5">
+          <div className="signup-input-container d-flex">
+            <span className="">
+              <div style={{ width: 20, height: 20 }}>
+                <Image src="/person.svg" width={20} height={20} alt="" />
               </div>
             </span>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter your e-mail"
+              placeholder="Enter your first name"
+              name="firstName"
+              onChange={handleChangeText}
+            />
+          </div>
+          <div className="signup-input-container d-flex mt-4">
+            <span className="">
+              <div style={{ width: 20, height: 20 }}>
+                <Image src="/person.svg" width={20} height={20} alt="" />
+              </div>
+            </span>
+            <input
+              type="text"
+              placeholder="Enter your last name"
+              name="lastName"
+              onChange={handleChangeText}
+            />
+          </div>
+          <div className="signup-input-container d-flex mt-4">
+            <span className="">
+              <div style={{ width: 20, height: 20 }}>
+                <Image src="/mail.svg" width={20} height={20} alt="" />
+              </div>
+            </span>
+            <input
+              type="text"
+              placeholder="Enter your email"
               name="email"
               onChange={handleChangeText}
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon2">
-              <div style={{ width: 25, height: 25 }}>
-                <Image
-                  src="/lock.svg"
-                  width={25}
-                  height={25}
-                  layout="responsive"
-                  alt="profile picture"
-                />
+          <div className="signup-input-container d-flex mt-4">
+            <span className="">
+              <div style={{ width: 20, height: 20 }}>
+                <Image src="/lock.svg" width={20} height={20} alt="" />
               </div>
             </span>
-            <div className="auth-input-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                placeholder="Enter your password"
-                name="password"
-                onChange={handleChangeText}
-              />
-              <span onClick={handleShowPassword}>
-                {showPassword ? (
-                  <div style={{ width: 25, height: 25 }}>
-                    <Image
-                      src="/eye-off.svg"
-                      width={25}
-                      height={25}
-                      layout="responsive"
-                      alt="profile picture"
-                    />
-                  </div>
-                ) : (
-                  <div style={{ width: 25, height: 25 }}>
-                    <Image
-                      src="/eye.svg"
-                      width={25}
-                      height={25}
-                      layout="responsive"
-                      alt="profile picture"
-                    />
-                  </div>
-                )}
-              </span>
-            </div>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              name="password"
+              onChange={handleChangeText}
+            />
+            <span onClick={handleShowPassword}>
+              {showPassword ? (
+                <div style={{ width: 25, height: 25 }}>
+                  <Image
+                    src="/eye-off.svg"
+                    width={25}
+                    height={25}
+                    layout="responsive"
+                    alt="profile picture"
+                  />
+                </div>
+              ) : (
+                <div style={{ width: 25, height: 25 }}>
+                  <Image
+                    src="/eye.svg"
+                    width={25}
+                    height={25}
+                    layout="responsive"
+                    alt="profile picture"
+                  />
+                </div>
+              )}
+            </span>
           </div>
         </form>
-        <div className="form-check d-flex justify-content-end ">
-          <label className="form-check-label">
-            <a href="../Signup/signup.html">Forgot Password?</a>
-          </label>
-        </div>
+
         <div class="d-grid mt-lg-5">
           <button
             className="btn btn-primary"
@@ -138,7 +141,9 @@ export default function Login() {
           <label className="form-check-label d-flex ">
             <p>
               Don&apos;t have an account? Let&apos;s{" "}
-              <a href="../Signup/signup.html">Sign Up</a>
+              <a href="../Signup/signup.html" className="text-primary">
+                Login
+              </a>
             </p>
           </label>
         </div>

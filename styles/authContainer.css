@@ -1,0 +1,22 @@
+.auth-container {
+  background-color: #6379f4;
+  height: 900px;
+}
+
+.auth-left-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-text {
+  padding-top: 50px;
+  padding-left: 150px;
+}
+
+.auth-description {
+  margin-top: 30px;
+  margin-left: 150px;
+  width: 500px;
+}
