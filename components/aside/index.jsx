@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import axiosClient from "utils/axios";
 
 export default function Aside() {
+  const [data, setData] = useState();
   const Router = useRouter();
 
   const handleDashboard = () => {
@@ -11,6 +13,22 @@ export default function Aside() {
 
   const handleTransfer = () => {
     Router.push("/transfer/search");
+  };
+
+  const handleChangeText = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+  console.log(data);
+
+  const handleTopup = async () => {
+    // console.log("topup " + data.amount);
+    // try {
+    const result = await axiosClient.post("transaction/top-up", data);
+    Router.push(result.data.data.redirectUrl);
+    console.log(result.data.data.redirectUrl);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -40,7 +58,7 @@ export default function Aside() {
           </div>
           <p className="mt-1 ms-3">Transfer</p>
         </a>
-        <div className="d-flex mt-lg-4">
+        <a className="d-flex mt-lg-4">
           <div style={{ width: 30, height: 30 }}>
             <Image
               src="/add.svg"
@@ -50,7 +68,68 @@ export default function Aside() {
               alt="dashboard"
             />
           </div>
-          <p className="mt-1 ms-3">Top Up</p>
+
+          <p
+            type="button"
+            className="mt-1 ms-3"
+            data-bs-toggle="modal"
+            data-bs-target="#topUp"
+          >
+            Top Up
+          </p>
+        </a>
+
+        <div
+          className="modal fade"
+          id="topUp"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <div>
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Topup
+                  </h5>
+                </div>
+
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="container">
+                <p className="text-muted container">
+                  Enter the amount of money, and click submit
+                </p>
+                <div className="modal-body">
+                  <form>
+                    {" "}
+                    <input
+                      type="text"
+                      className="aside-input"
+                      name="amount"
+                      onChange={handleChangeText}
+                    />
+                  </form>
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleTopup}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="d-flex mt-lg-4">
           <div style={{ width: 30, height: 30 }}>

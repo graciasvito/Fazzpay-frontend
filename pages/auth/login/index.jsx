@@ -138,7 +138,7 @@ export default function Login() {
           <label className="form-check-label d-flex ">
             <p>
               Don&apos;t have an account? Let&apos;s{" "}
-              <a href="../Signup/signup.html">Sign Up</a>
+              <a href="../auth/signup">Sign Up</a>
             </p>
           </label>
         </div>

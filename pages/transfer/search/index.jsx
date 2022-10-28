@@ -25,15 +25,17 @@ export default function History() {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault;
     handleSubmit(form);
 
     // or you can send data to backend
   };
+  console.log(form);
 
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
-    if (e.keyCode === 13) {
-      handleSubmit();
+    if (e.keycode === 13) {
+      console.log("enter");
     }
   };
 

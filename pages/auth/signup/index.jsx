@@ -20,7 +20,7 @@ export default function Login() {
       //   proses kondisi pengecekan pin jika ada akan diarahkan ke home jika tidak ada akan diarahkan ke create pin
       router.push("/login");
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.msg);
     }
   };
 
@@ -141,7 +141,7 @@ export default function Login() {
           <label className="form-check-label d-flex ">
             <p>
               Don&apos;t have an account? Let&apos;s{" "}
-              <a href="../Signup/signup.html" className="text-primary">
+              <a href="../auth/login" className="text-primary">
                 Login
               </a>
             </p>
