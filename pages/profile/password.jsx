@@ -54,7 +54,7 @@ export default function History() {
             </p>
           </div>
           <form className="d-grid justify-content-center gap-5 ">
-            <div className="signup-input-container d-flex mt-4">
+            <div className="signup-input-container d-flex mt-4 ">
               <span className="">
                 <div style={{ width: 20, height: 20 }}>
                   <Image src="/lock.svg" width={20} height={20} alt="" />
@@ -162,7 +162,7 @@ export default function History() {
                 )}
               </span>
             </div>
-            <button class="btn btn-primary" type="button">
+            <button className="btn btn-primary" type="button">
               Change Password
             </button>
           </form>

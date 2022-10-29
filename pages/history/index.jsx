@@ -25,7 +25,7 @@ export default function History() {
       <Layout title="History">
         <div className="container mt-3 d-flex justify-content-between">
           <h5 className="ms-4 fw-bold">Transaction History</h5>
-          <button type="button" class="btn btn-outline-secondary me-4">
+          <button type="button" className="btn btn-outline-secondary me-4">
             --Select Filter--
           </button>
         </div>
@@ -66,7 +66,7 @@ export default function History() {
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >

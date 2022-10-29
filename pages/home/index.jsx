@@ -44,7 +44,10 @@ export default function Home() {
           </div>
           <div className="summary-button d-flex align-items-center">
             <div>
-              <button type="button" class="btn summary-button text-white mb-2">
+              <button
+                type="button"
+                className="btn summary-button text-white mb-2"
+              >
                 <div className="d-flex">
                   <div style={{ width: 30, height: 30 }}>
                     <Image
@@ -58,7 +61,10 @@ export default function Home() {
                   <p className="mt-1 ms-3">Transfer</p>
                 </div>
               </button>
-              <button type="button" class="btn  summary-button text-white mt-2">
+              <button
+                type="button"
+                className="btn  summary-button text-white mt-2"
+              >
                 <div className="d-flex">
                   <div style={{ width: 30, height: 30 }}>
                     <Image

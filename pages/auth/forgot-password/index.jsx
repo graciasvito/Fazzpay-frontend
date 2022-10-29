@@ -59,7 +59,7 @@ export default function CreatePIN() {
           />
         </div>
 
-        <div class="d-grid mt-lg-5">
+        <div className="d-grid mt-lg-5">
           <button
             className="btn btn-primary"
             type="button"

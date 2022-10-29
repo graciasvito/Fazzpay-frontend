@@ -11,9 +11,9 @@ export default function Header() {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand fw-bold text-primary" onClick={handleHome}>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          <a className="navbar-brand fw-bold text-primary" onClick={handleHome}>
             FazzPay
           </a>
 

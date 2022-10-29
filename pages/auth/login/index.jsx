@@ -54,8 +54,8 @@ export default function Login() {
           </p>
         </div>
         <form>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
               <div style={{ width: 25, height: 25 }}>
                 <Image
                   src="/mail.svg"
@@ -74,8 +74,8 @@ export default function Login() {
               onChange={handleChangeText}
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon2">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon2">
               <div style={{ width: 25, height: 25 }}>
                 <Image
                   src="/lock.svg"
@@ -125,7 +125,7 @@ export default function Login() {
             <a href="../Signup/signup.html">Forgot Password?</a>
           </label>
         </div>
-        <div class="d-grid mt-lg-5">
+        <div className="d-grid mt-lg-5">
           <button
             className="btn btn-primary"
             type="button"

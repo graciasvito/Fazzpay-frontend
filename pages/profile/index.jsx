@@ -4,6 +4,7 @@ import Layout from "layout";
 import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function History() {
   const [data, setData] = useState([]);
@@ -44,45 +45,51 @@ export default function History() {
             <h4 className="fw-bold">Robert Chandler</h4>
             <h6 className="text-secondary">+62 813-9387-7946</h6>
             <div className="mt-5 d-grid gap-3 ">
-              <button className="btn btn-color " type="button">
-                <div className="d-flex justify-content-between">
-                  <span className="fw-bold">Personal Information</span>
-                  <span className="mt-1">
-                    <Image
-                      src="/arrow-right.svg"
-                      width="18"
-                      height="18"
-                      alt=""
-                    />
-                  </span>
-                </div>
-              </button>
-              <button className="btn btn-color " type="button">
-                <div className="d-flex justify-content-between">
-                  <span className="fw-bold">Change Password</span>
-                  <span className="mt-1">
-                    <Image
-                      src="/arrow-right.svg"
-                      width="18"
-                      height="18"
-                      alt=""
-                    />
-                  </span>
-                </div>
-              </button>
-              <button className="btn btn-color " type="button">
-                <div className="d-flex justify-content-between">
-                  <span className="fw-bold">Change PIN</span>
-                  <span className="mt-1">
-                    <Image
-                      src="/arrow-right.svg"
-                      width="18"
-                      height="18"
-                      alt=""
-                    />
-                  </span>
-                </div>
-              </button>
+              <Link href="/profile/personal">
+                <button className="btn btn-color " type="button">
+                  <div className="d-flex justify-content-between">
+                    <span className="fw-bold">Personal Information</span>
+                    <span className="mt-1">
+                      <Image
+                        src="/arrow-right.svg"
+                        width="18"
+                        height="18"
+                        alt=""
+                      />
+                    </span>
+                  </div>
+                </button>
+              </Link>
+              <Link href="/profile/password">
+                <button className="btn btn-color " type="button">
+                  <div className="d-flex justify-content-between">
+                    <span className="fw-bold">Change Password</span>
+                    <span className="mt-1">
+                      <Image
+                        src="/arrow-right.svg"
+                        width="18"
+                        height="18"
+                        alt=""
+                      />
+                    </span>
+                  </div>
+                </button>
+              </Link>
+              <Link href="/profile/pin">
+                <button className="btn btn-color " type="button">
+                  <div className="d-flex justify-content-between">
+                    <span className="fw-bold">Change PIN</span>
+                    <span className="mt-1">
+                      <Image
+                        src="/arrow-right.svg"
+                        width="18"
+                        height="18"
+                        alt=""
+                      />
+                    </span>
+                  </div>
+                </button>
+              </Link>
               <button className="btn btn-color fw-bold" type="button">
                 Logout
               </button>

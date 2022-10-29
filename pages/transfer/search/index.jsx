@@ -4,43 +4,42 @@ import Layout from "layout";
 import axiosClient from "utils/axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function History() {
   const Router = useRouter();
   const [data, setData] = useState([]);
   const [form, setForm] = useState([]);
 
+  const searchName = form.firstName;
+
   useEffect(() => {
     getDataUser();
   }, []);
 
+  useEffect(() => {
+    getDataUser();
+  }, [searchName]);
+
   const getDataUser = async () => {
     try {
       const result = await axiosClient.get(
-        `user?page=1&limit=4&search=&sort=firstName ASC`
+        `user?page=1&limit=4&search=${searchName}&sort=firstName ASC`
       );
-      console.log(result.data.data);
+
       setData(result.data.data);
     } catch (error) {}
   };
 
-  const handleSubmit = (e) => {
+  const handleChangeText = (e) => {
     e.preventDefault;
-    handleSubmit(form);
-
-    // or you can send data to backend
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-  console.log(form);
 
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
-    if (e.keycode === 13) {
-      console.log("enter");
+    if (e.key === "Enter") {
     }
-  };
-
-  const handleTransfer = (id) => {
-    Router.push(`/transfer/${id}`);
   };
 
   return (
@@ -59,14 +58,16 @@ export default function History() {
             type="text"
             placeholder="Search receiver here"
             name="firstName"
-            onChange={(e) => {
-              setForm(e.target.value);
-            }}
+            onChange={handleChangeText}
             onKeyPress={handleKeypress}
           />
         </div>
         {data.map((item) => (
-          <div className="d-flex mt-5 justify-content-between" key={item}>
+          <div
+            className="d-flex mt-5 justify-content-between"
+            key={item}
+            //
+          >
             <div className="ms-4 d-flex">
               <div style={{ width: 40, height: 40 }} className="mt-2 ">
                 <Image
@@ -78,12 +79,14 @@ export default function History() {
                 />
               </div>
               <div className="ms-3">
-                <a href="" onClick={handleTransfer}>
-                  <p>{item.firstName}</p>
-                  <p className="text-secondary">
-                    {item.noTelp ? item.noTelp : "-"}
-                  </p>
-                </a>
+                <Link href={`/transfer/${item.id}`}>
+                  <div>
+                    <p>{item.firstName}</p>
+                    <p className="text-secondary">
+                      {item.noTelp ? item.noTelp : "-"}
+                    </p>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

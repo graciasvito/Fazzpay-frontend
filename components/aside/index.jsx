@@ -18,17 +18,12 @@ export default function Aside() {
   const handleChangeText = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  console.log(data);
 
   const handleTopup = async () => {
     // console.log("topup " + data.amount);
     // try {
     const result = await axiosClient.post("transaction/top-up", data);
     Router.push(result.data.data.redirectUrl);
-    console.log(result.data.data.redirectUrl);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
@@ -82,7 +77,7 @@ export default function Aside() {
         <div
           className="modal fade"
           id="topUp"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
