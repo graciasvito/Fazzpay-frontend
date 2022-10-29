@@ -4,8 +4,11 @@ import Layout from "layout";
 // import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
+// import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function History() {
+export default function TransferAmount() {
+  // const Router = useRouter();
   //   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
 
@@ -23,7 +26,7 @@ export default function History() {
           <div className="w-50">
             <div>
               <h5 className="fw-bold">Transfer Money</h5>
-              <div className="container mt-5">
+              <div className="container mt-4">
                 <div className="card-body d-flex ">
                   <div style={{ width: 60, height: 60 }} className=" tes">
                     <Image
@@ -49,24 +52,41 @@ export default function History() {
               </p>
             </div>
           </div>
-          <form className="d-grid justify-content-center gap-5 phone-form-container">
-            <div className="signup-input-container d-flex mt-4">
-              <span className="">
-                <div style={{ width: 20, height: 20 }}>
-                  <Image src="/call.svg" width={20} height={20} alt="" />
-                </div>
-              </span>
-              <span>+62</span>
+          <form className="d-grid justify-content-center gap-5 mt-5 ">
+            <div className=" mt-4">
               <input
                 type="text"
-                placeholder="Current Password"
-                name="oldPassword"
+                placeholder="0.00"
+                name="amount"
+                className="transfer-amount-input"
+                onChange={handleChangeText}
               />
             </div>
-            <button className="btn btn-primary" type="button">
-              Change Password
-            </button>
+            <span className="text-center fw-bold">Rp120.000 Available</span>
           </form>
+          <div className="d-grid justify-content-center">
+            <div className="transfer-note-input-container d-flex mt-4">
+              <span>
+                <div style={{ width: 20, height: 20 }}>
+                  <Image src="/pencil.svg" width={20} height={20} alt="" />
+                </div>
+              </span>
+              <input
+                type="text"
+                placeholder="Add some notes"
+                name="notes"
+                onChange={handleChangeText}
+              />
+            </div>
+          </div>
+
+          <div className="d-grid justify-content-end me-3 mt-5">
+            <Link href={{ pathname: "/transfer/confirmation", query: form }}>
+              <button className="btn btn-primary " type="button">
+                Continue
+              </button>
+            </Link>
+          </div>
         </div>
       </Layout>
     </div>
