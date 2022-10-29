@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className=" footer-container d-flex align-items-end">
+    <div className=" footer-container d-md-flex align-items-end  d-none">
       <footer className="container d-flex justify-content-between">
         <p className="text-white ">2022 FazzPay. All right reserved</p>
         <div className="d-flex text-white">

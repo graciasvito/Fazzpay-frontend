@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <div>
+    <div className="d-md-inline d-none">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <a className="navbar-brand fw-bold text-primary" onClick={handleHome}>

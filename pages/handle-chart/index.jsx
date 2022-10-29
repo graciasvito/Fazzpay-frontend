@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import axiosClient from "utils/axios";
 
 ChartJS.register(
   CategoryScale,
@@ -47,6 +48,11 @@ export const data = {
 };
 
 export default function HandleChart() {
+  axiosClient
+    .get("/dashboard/fce5d0fa-4ba0-468c-98fa-d757bef2e89b")
+    .then((res) => {
+      console.log(res);
+    });
   return (
     <div className="container text-center">
       <h1>Handle Chart </h1>

@@ -14,7 +14,7 @@ export default function History() {
   const historyTransaction = async () => {
     try {
       const result = await axiosClient.get(
-        "/transaction/history?page=1&limit=3&filter=WEEK"
+        "/transaction/history?page=1&limit=5&filter=WEEK"
       );
       setData(result.data.data);
     } catch (error) {}
@@ -47,58 +47,18 @@ export default function History() {
                   <p className="text-secondary">{item.type}</p>
                 </div>
               </div>
-              <p className="d-flex align-items-center me-4">{item.amount}</p>
+              <p className="d-flex align-items-center me-4">
+                {item.type === "topup" ? (
+                  <p className="text-success">+ {item.amount}</p>
+                ) : (
+                  <p className="text-danger">- ${item.amount}</p>
+                )}
+              </p>
             </div>
           ))
         ) : (
           <h2>Data Not Found !</h2>
         )}
-
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          Launch demo modal
-        </button>
-
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">...</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* {}{" "} */}
         {/* {data.map((item) => (

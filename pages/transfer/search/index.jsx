@@ -44,7 +44,7 @@ export default function History() {
 
   return (
     <div className="all-page">
-      <Layout title="Transfer">
+      <Layout title="History">
         <div className="container mt-5 ">
           <h5 className="ms-4 fw-bold">Search Receiver</h5>
         </div>

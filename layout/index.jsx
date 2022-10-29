@@ -19,7 +19,7 @@ export default function Layout(props) {
 
       <section className="container layout-section-container">
         <Aside />
-        <main className="right-section-container ms-sm-5">
+        <main className="right-section-container ms-sm-5 pb-5">
           {props.children}
         </main>
       </section>

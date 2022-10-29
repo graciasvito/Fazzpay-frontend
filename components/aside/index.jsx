@@ -27,7 +27,7 @@ export default function Aside() {
   };
 
   return (
-    <aside className="aside-container d-flex flex-column justify-content-around ">
+    <aside className="aside-container d-md-flex flex-column justify-content-around d-none">
       <div className=" ms-lg-4">
         <a className="d-flex" onClick={handleDashboard}>
           <div style={{ width: 30, height: 30 }}>
