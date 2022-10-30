@@ -7,7 +7,7 @@ export default function LandingPage() {
 
   const token = Cookies.get("token");
 
-  if (token.length < 1) {
+  if (!token) {
     Router.push("/auth/login");
   } else {
     Router.push("/home");

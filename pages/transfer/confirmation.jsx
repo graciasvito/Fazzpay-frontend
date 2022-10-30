@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 
 import Layout from "layout";
@@ -10,6 +11,7 @@ import moment from "moment/moment";
 
 export default function History() {
   const Router = useRouter();
+
   const form = Router.query;
 
   const [data, setData] = useState([]);
@@ -21,10 +23,8 @@ export default function History() {
   }, []);
 
   const dataUser = async () => {
-    try {
-      const result = await axiosClient.get(`user/profile/${userId}`);
-      setData(result.data.data);
-    } catch (error) {}
+    const result = await axiosClient.get(`user/profile/${userId}`);
+    setData(result.data.data);
   };
 
   const [pin, setPin] = useState({
@@ -54,18 +54,24 @@ export default function History() {
     }
   };
 
+  const handleTransfer = async () => {
+    const result = await axiosClient.post("transaction/transfer", form);
+    Router.push("/transfer/status");
+  };
+
   const handlePINSubmit = async (e) => {
     e.preventDefault();
     let allPin = "";
     for (const item in pin) {
       allPin += pin[item];
     }
-    console.log(allPin);
+
     try {
       const result = await axiosClient.get(`user/pin/${allPin}`);
       alert(result.data.msg);
+      handleTransfer();
     } catch (error) {
-      console.log(error);
+      alert(error.response.data);
     }
   };
 
@@ -105,7 +111,7 @@ export default function History() {
             <div className="card-body mt-3 shadow-sm">
               <p className="card-title text-secondary">Balance Left</p>
               <h5 className="card-text fw-bold">
-                Rp{new Intl.NumberFormat().format(20000)}
+                Rp{new Intl.NumberFormat().format(data.balance - form.amount)}
               </h5>
             </div>
             <div className="card-body mt-3 shadow-sm">

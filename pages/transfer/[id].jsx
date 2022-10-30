@@ -1,18 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Layout from "layout";
-// import axiosClient from "utils/axios";
+import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function TransferAmount() {
-  // const Router = useRouter();
-  //   const [data, setData] = useState([]);
+  const Router = useRouter();
+  const [sender, setSender] = useState([]);
+  const [receive, setReceive] = useState([]);
   const [form, setForm] = useState({});
 
+  const { id } = Router.query;
+
   const userId = Cookies.get("userId");
+
+  useEffect(() => {
+    dataSenderById(), dataReceiverById();
+  }, []);
+
+  const dataReceiverById = async () => {
+    try {
+      const result = await axiosClient.get(`user/profile/${id}`);
+      setReceive(result.data.data);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
+
+  const dataSenderById = async () => {
+    try {
+      const result = await axiosClient.get(`user/profile/${userId}`);
+      setSender(result.data.data);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
 
   const handleChangeText = (e) => {
     // console.log(e);
@@ -39,9 +64,9 @@ export default function TransferAmount() {
                   </div>
 
                   <div className="ms-3">
-                    <p className="card-text fw-bold">Robert</p>
+                    <p className="card-text fw-bold">{receive.firstName}</p>
                     <p className="card-title text-secondary">
-                      +62 813-8492-9994
+                      +62 {receive.noTelp}
                     </p>
                   </div>
                 </div>
@@ -62,7 +87,9 @@ export default function TransferAmount() {
                 onChange={handleChangeText}
               />
             </div>
-            <span className="text-center fw-bold">Rp120.000 Available</span>
+            <span className="text-center fw-bold">
+              Rp{new Intl.NumberFormat().format(sender.balance)} Available
+            </span>
           </form>
           <div className="d-grid justify-content-center">
             <div className="transfer-note-input-container d-flex mt-4">
@@ -81,7 +108,16 @@ export default function TransferAmount() {
           </div>
 
           <div className="d-grid justify-content-end me-3 mt-5">
-            <Link href={{ pathname: "/transfer/confirmation", query: form }}>
+            <Link
+              href={{
+                pathname: "/transfer/confirmation",
+                query: {
+                  amount: form.amount,
+                  notes: form.notes,
+                  receiverId: id,
+                },
+              }}
+            >
               <button className="btn btn-primary " type="button">
                 Continue
               </button>

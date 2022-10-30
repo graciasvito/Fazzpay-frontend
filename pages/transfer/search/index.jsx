@@ -24,7 +24,9 @@ export default function History() {
   const getDataUser = async () => {
     try {
       const result = await axiosClient.get(
-        `user?page=1&limit=4&search=${searchName}&sort=firstName ASC`
+        `user?page=1&limit=4&search=${
+          searchName === undefined ? "" : searchName
+        }&sort=firstName ASC`
       );
 
       setData(result.data.data);

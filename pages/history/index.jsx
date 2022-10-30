@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function History() {
   const [data, setData] = useState([]);
+  console.log(data);
 
   useEffect(() => {
     historyTransaction();
@@ -35,7 +36,7 @@ export default function History() {
               <div className="ms-4 d-flex">
                 <div style={{ width: 40, height: 40 }} className="mt-2 ">
                   <Image
-                    src="/profile.png"
+                    src="https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay/vfnkdhjqdmcgyvbln235.png"
                     width={40}
                     height={40}
                     layout="responsive"

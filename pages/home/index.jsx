@@ -51,7 +51,9 @@ export default function Home() {
           <div id="dashboard-summary" className="d-flex w-100 pt-4">
             <div className="container text-white balance-container d-flex flex-column justify-content-around">
               <p>Balance</p>
-              <h2 className="fw-bold">Rp{data.balance}</h2>
+              <h2 className="fw-bold">
+                Rp{new Intl.NumberFormat().format(data.balance)}
+              </h2>
               <p>+62 812-3456-1278</p>
             </div>
             <div className="summary-button d-flex align-items-center">

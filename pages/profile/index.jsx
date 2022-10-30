@@ -12,14 +12,16 @@ export default function History() {
   const userId = Cookies.get("userId");
 
   useEffect(() => {
-    dataUser();
+    dataUserById();
   }, []);
 
-  const dataUser = async () => {
+  const dataUserById = async () => {
     try {
       const result = await axiosClient.get(`user/profile/${userId}`);
       setData(result.data.data);
-    } catch (error) {}
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
   };
 
   return (
@@ -42,8 +44,10 @@ export default function History() {
         </div>
         <div className="d-flex justify-content-center ">
           <div className="text-center profile-container">
-            <h4 className="fw-bold">Robert Chandler</h4>
-            <h6 className="text-secondary">+62 813-9387-7946</h6>
+            <h4 className="fw-bold">
+              {data.firstName} {data.lastName}
+            </h4>
+            <h6 className="text-secondary">+62 {data.noTelp}</h6>
             <div className="mt-5 d-grid gap-3 ">
               <Link href="/profile/personal">
                 <button className="btn btn-color " type="button">
