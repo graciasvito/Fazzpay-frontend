@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Layout from "layout";
 import axiosClient from "utils/axios";
+
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";

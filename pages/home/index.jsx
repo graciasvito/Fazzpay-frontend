@@ -8,11 +8,13 @@ import Link from "next/link";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [history, setHistory] = useState({});
+  const [dashboard, setDashboard] = useState({});
 
   const userId = Cookies.get("userId");
 
   useEffect(() => {
-    getDataUserById();
+    getDataUserById(), historyTransaction(), getDashboard();
   }, []);
 
   const handleChangeText = (e) => {
@@ -32,6 +34,25 @@ export default function Home() {
       setData(result.data.data);
       // setData(result)
     } catch (error) {}
+  };
+
+  const historyTransaction = async () => {
+    try {
+      const result = await axiosClient.get(
+        "/transaction/history?page=1&limit=4&filter=YEAR"
+      );
+      console.log(result);
+      setHistory(result.data.data);
+    } catch (error) {}
+  };
+
+  const getDashboard = async () => {
+    try {
+      const result = await axiosClient.get(`dashboard/${userId}`);
+      setDashboard(result.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -154,7 +175,9 @@ export default function Home() {
                   alt="income arrow"
                 />
                 <p>Income</p>
-                <h5 className="fw-bold">Rp2.120.000</h5>
+                <h5 className="fw-bold">
+                  Rp{new Intl.NumberFormat().format(dashboard.totalIncome)}
+                </h5>
               </div>
               <div className="col-6">
                 <Image
@@ -164,12 +187,58 @@ export default function Home() {
                   alt="expense arrow"
                 />
                 <p>Expense</p>
-                <h5 className="fw-bold">Rp1.560.000 </h5>
+                <h5 className="fw-bold">
+                  Rp{new Intl.NumberFormat().format(dashboard.totalExpense)}{" "}
+                </h5>
               </div>
             </div>
           </div>
           <div className="col-5 pt-lg-5">
-            <div></div>
+            <div className="d-flex justify-content-around">
+              <h5 className="fw-bold">History Transaction</h5>
+              <Link href="/history">
+                <a className="text-primary">See All</a>
+              </Link>
+            </div>
+            <div>
+              {history.length > 0 ? (
+                history.map((item) => (
+                  <div
+                    className="d-flex mt-5 justify-content-between"
+                    key={item}
+                  >
+                    <div className="ms-4 d-flex">
+                      <div style={{ width: 40, height: 40 }} className="mt-2 ">
+                        <Image
+                          src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`}
+                          width={40}
+                          height={40}
+                          layout="responsive"
+                          alt="dashboard"
+                        />
+                      </div>
+                      <div className="ms-3">
+                        <p>{item.fullName}</p>
+                        <p className="text-secondary">{item.type}</p>
+                      </div>
+                    </div>
+                    <p className="d-flex align-items-center me-4">
+                      {item.type === "topup" || item.type === "accept" ? (
+                        <p className="text-success">
+                          + Rp{new Intl.NumberFormat().format(item.amount)}
+                        </p>
+                      ) : (
+                        <p className="text-danger">
+                          - Rp{new Intl.NumberFormat().format(item.amount)}
+                        </p>
+                      )}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <h2>Data Not Found !</h2>
+              )}
+            </div>
           </div>
         </div>
       </Layout>

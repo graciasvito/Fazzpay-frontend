@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Layout from "layout";
-import axiosClient from "utils/axios";
+
+import axiosServer from "utils/axiosServer";
 import Image from "next/image";
+import Cookies from "next-cookies";
 
-export default function History() {
-  const [data, setData] = useState([]);
-  console.log(data);
-
-  useEffect(() => {
-    historyTransaction();
-  }, []);
-
-  const historyTransaction = async () => {
-    try {
-      const result = await axiosClient.get(
-        "/transaction/history?page=1&limit=5&filter=YEAR"
-      );
-      console.log(result);
-      setData(result.data.data);
-    } catch (error) {}
-  };
-
+export default function History(props) {
   return (
     <div className="all-page">
       <Layout title="History">
@@ -31,8 +16,8 @@ export default function History() {
             --Select Filter--
           </button>
         </div>
-        {data.length > 0 ? (
-          data.map((item) => (
+        {props.listUser.length > 0 ? (
+          props.listUser.map((item) => (
             <div className="d-flex mt-5 justify-content-between" key={item}>
               <div className="ms-4 d-flex">
                 <div style={{ width: 40, height: 40 }} className="mt-2 ">
@@ -50,7 +35,7 @@ export default function History() {
                 </div>
               </div>
               <p className="d-flex align-items-center me-4">
-                {item.type === "topup" || "accept" ? (
+                {item.type === "topup" || item.type === "accept" ? (
                   <p className="text-success">
                     + Rp{new Intl.NumberFormat().format(item.amount)}
                   </p>
@@ -65,14 +50,26 @@ export default function History() {
         ) : (
           <h2>Data Not Found !</h2>
         )}
-
-        {/* {}{" "} */}
-        {/* {data.map((item) => (
-          <div className="card my-3" key={item}>
-            <h1>{item.id}</h1>
-          </div>
-        ))}{" "} */}
       </Layout>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const dataCookies = Cookies(context);
+  const result = await axiosServer.get(
+    "/transaction/history?page=1&limit=5&filter=YEAR",
+    {
+      headers: {
+        Authorization: `Bearer ${dataCookies.token}`,
+      },
+    }
+  );
+
+  return {
+    props: {
+      listUser: result.data.status === 200 ? result.data.data : [],
+      pagination: result.data.status === 200 ? result.data.pagination : {},
+    }, // will be passed to the page component as props
+  };
 }

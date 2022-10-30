@@ -8,6 +8,8 @@ import Link from "next/link";
 
 export default function History() {
   const [data, setData] = useState([]);
+  const [image, setImage] = useState("");
+  const [imageForm, setImageForm] = useState({});
 
   const userId = Cookies.get("userId");
 
@@ -24,20 +26,62 @@ export default function History() {
     }
   };
 
+  const handleChangeImage = (e) => {
+    const { name, files } = e.target;
+
+    setImageForm({ ...imageForm, [name]: files[0] });
+    setImage(URL.createObjectURL(files[0]));
+  };
+
+  const handleUpdateImage = (e) => {
+    e.preventDefault();
+    const formImageData = new FormData();
+    for (const image in imageForm) {
+      formImageData.append(image, imageForm[image]);
+    }
+
+    axiosClient
+      .patch(`user/image/${userId}`, formImageData)
+      .then((response) => {
+        alert(response);
+      });
+  };
+
   return (
     <div className="all-page">
       <Layout title="Profile">
         <div className="d-flex justify-content-center mt-lg-5">
           <div>
             <div style={{ width: 80, height: 80 }} className="">
-              <Image src="/profile.png" width={80} height={80} alt="" />
+              <Image
+                src={
+                  image
+                    ? image
+                    : `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${data.image}`
+                }
+                width={80}
+                height={80}
+                alt=""
+              />
             </div>
             <div className="d-flex justify-content-center mt-1">
               <div className="me-2">
                 <Image src="/pencil.svg" width={15} height={15} alt="" />
               </div>
               <div>
-                <p className="">Edit</p>
+                <input
+                  type="file"
+                  className="d-none"
+                  id="profile-img"
+                  name="image"
+                  onChange={image ? handleChangeImage : ""}
+                />
+                <label
+                  htmlFor="profile-img"
+                  onClick={image ? handleUpdateImage : ""}
+                >
+                  {image ? "Save" : "Edit"}
+                </label>
               </div>
             </div>
           </div>

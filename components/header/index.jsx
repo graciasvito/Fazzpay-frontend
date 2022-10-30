@@ -30,7 +30,7 @@ export default function Header() {
             <div className="d-flex align-items-center">
               <div style={{ width: 50, height: 50 }}>
                 <Image
-                  src="/profile.png"
+                  src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${data.image}`}
                   width={50}
                   height={50}
                   layout="responsive"

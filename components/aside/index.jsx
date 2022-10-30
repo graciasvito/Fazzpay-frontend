@@ -31,6 +31,12 @@ export default function Aside() {
     Router.push("/profile");
   };
 
+  const handleLogout = async () => {
+    const result = await axiosClient.post("auth/logout");
+    alert(result.data.msg);
+    Router.push("/auth/login");
+  };
+
   return (
     <aside className="aside-container d-md-flex flex-column justify-content-around d-none">
       <div className=" ms-lg-4">
@@ -146,7 +152,7 @@ export default function Aside() {
           </div>
         </a>
       </div>
-      <div className="ms-lg-4 ">
+      <div className="ms-lg-4" onClick={handleLogout}>
         <div className="d-flex ">
           <div style={{ width: 30, height: 30 }}>
             <Image
@@ -157,6 +163,7 @@ export default function Aside() {
               alt="dashboard"
             />
           </div>
+
           <p className="mt-1 ms-3">Logout</p>
         </div>
       </div>
