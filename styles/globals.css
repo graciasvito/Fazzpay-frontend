@@ -32,19 +32,21 @@ a {
 
 .right-section-container {
   width: 900px;
-  height: 1000px;
+  /* height: 1000px; */
   background-color: white;
   border-radius: 50px;
   /* margin-right: 50px; */
+  padding: 0 0 100;
 }
 
 /* aside */
 
 .aside-container {
   width: 270px;
-  height: 1000px;
+  /* height: 1000px; */
   background-color: #fff;
   border-radius: 25px;
+  padding: 100px 0;
 }
 
 @media (prefers-color-scheme: dark) {

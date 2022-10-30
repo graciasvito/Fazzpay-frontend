@@ -15,8 +15,9 @@ export default function History() {
   const historyTransaction = async () => {
     try {
       const result = await axiosClient.get(
-        "/transaction/history?page=1&limit=5&filter=WEEK"
+        "/transaction/history?page=1&limit=5&filter=YEAR"
       );
+      console.log(result);
       setData(result.data.data);
     } catch (error) {}
   };
@@ -36,7 +37,7 @@ export default function History() {
               <div className="ms-4 d-flex">
                 <div style={{ width: 40, height: 40 }} className="mt-2 ">
                   <Image
-                    src="https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay/vfnkdhjqdmcgyvbln235.png"
+                    src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`}
                     width={40}
                     height={40}
                     layout="responsive"
@@ -49,10 +50,14 @@ export default function History() {
                 </div>
               </div>
               <p className="d-flex align-items-center me-4">
-                {item.type === "topup" ? (
-                  <p className="text-success">+ {item.amount}</p>
+                {item.type === "topup" || "accept" ? (
+                  <p className="text-success">
+                    + Rp{new Intl.NumberFormat().format(item.amount)}
+                  </p>
                 ) : (
-                  <p className="text-danger">- ${item.amount}</p>
+                  <p className="text-danger">
+                    - Rp{new Intl.NumberFormat().format(item.amount)}
+                  </p>
                 )}
               </p>
             </div>

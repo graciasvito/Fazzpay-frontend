@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import axiosClient from "utils/axios";
@@ -24,6 +25,10 @@ export default function Aside() {
     // try {
     const result = await axiosClient.post("transaction/top-up", data);
     Router.push(result.data.data.redirectUrl);
+  };
+
+  const handleProfile = () => {
+    Router.push("/profile");
   };
 
   return (
@@ -126,18 +131,20 @@ export default function Aside() {
             </div>
           </div>
         </div>
-        <div className="d-flex mt-lg-4">
-          <div style={{ width: 30, height: 30 }}>
-            <Image
-              src="/person.svg"
-              width={30}
-              height={30}
-              layout="responsive"
-              alt="dashboard"
-            />
+        <a onClick={handleProfile}>
+          <div className="d-flex mt-lg-4">
+            <div style={{ width: 30, height: 30 }}>
+              <Image
+                src="/person.svg"
+                width={30}
+                height={30}
+                layout="responsive"
+                alt="dashboard"
+              />
+            </div>
+            <p className="mt-1 ms-3">Profile</p>
           </div>
-          <p className="mt-1 ms-3">Profile</p>
-        </div>
+        </a>
       </div>
       <div className="ms-lg-4 ">
         <div className="d-flex ">

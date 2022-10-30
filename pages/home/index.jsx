@@ -4,6 +4,7 @@ import Layout from "layout";
 import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -13,17 +14,6 @@ export default function Home() {
   useEffect(() => {
     getDataUserById();
   }, []);
-
-  // const getDataUser = async () => {
-  //   try {
-  //     const result = await axiosClient.get(
-  //       "/user?page=1&limit=50&search=&sort=firstName ASC"
-  //     );
-  //     setData(result.data.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleChangeText = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -58,23 +48,26 @@ export default function Home() {
             </div>
             <div className="summary-button d-flex align-items-center">
               <div>
-                <button
-                  type="button"
-                  className="btn summary-button text-white mb-2"
-                >
-                  <div className="d-flex">
-                    <div style={{ width: 30, height: 30 }}>
-                      <Image
-                        src="/arrow-up.svg"
-                        width={30}
-                        height={30}
-                        layout="responsive"
-                        alt="dashboard"
-                      />
+                <Link href="/transfer/search">
+                  <button
+                    type="button"
+                    className="btn summary-button text-white mb-2"
+                  >
+                    <div className="d-flex">
+                      <div style={{ width: 30, height: 30 }}>
+                        <Image
+                          src="/arrow-up.svg"
+                          width={30}
+                          height={30}
+                          layout="responsive"
+                          alt="dashboard"
+                        />
+                      </div>
+
+                      <a className="mt-1 ms-3">Transfer</a>
                     </div>
-                    <p className="mt-1 ms-3">Transfer</p>
-                  </div>
-                </button>
+                  </button>
+                </Link>
                 <button
                   type="button"
                   className="btn  summary-button text-white mt-2"
@@ -148,6 +141,35 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="d-flex mt-lg-2 ">
+          <div className="col-7 container pt-lg-5">
+            <div className="d-flex">
+              <div className="col-6">
+                <Image
+                  src="/arrow-green.svg"
+                  width={30}
+                  height={30}
+                  alt="income arrow"
+                />
+                <p>Income</p>
+                <h5 className="fw-bold">Rp2.120.000</h5>
+              </div>
+              <div className="col-6">
+                <Image
+                  src="/arrow-red.svg"
+                  width={30}
+                  height={30}
+                  alt="expense arrow"
+                />
+                <p>Expense</p>
+                <h5 className="fw-bold">Rp1.560.000 </h5>
+              </div>
+            </div>
+          </div>
+          <div className="col-5 pt-lg-5">
+            <div></div>
           </div>
         </div>
       </Layout>

@@ -6,7 +6,7 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 
 export default function History() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [form, setForm] = useState({});
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -15,18 +15,14 @@ export default function History() {
 
   const userId = Cookies.get("userId");
 
-  // useEffect(() => {
-  //   dataUser();
-  // }, []);
-
-  // const dataUser = async () => {
-  //   try {
-  //     const result = await axiosClient.get(`user/profile/${userId}`);
-  //     setData(result.data.data);
-  //     console.log(result);
-  //   } catch (error) {}
-  // };
-
+  const handleChangePassword = async () => {
+    try {
+      const result = await axiosClient.patch(`user/password/${userId}`, form);
+      alert(result.data.msg);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
   const handleChangeText = (e) => {
     // console.log(e);
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -162,7 +158,11 @@ export default function History() {
                 )}
               </span>
             </div>
-            <button className="btn btn-primary" type="button">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleChangePassword}
+            >
               Change Password
             </button>
           </form>

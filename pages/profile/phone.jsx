@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Layout from "layout";
-// import axiosClient from "utils/axios";
+import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 
@@ -10,6 +10,15 @@ export default function History() {
   const [form, setForm] = useState({});
 
   const userId = Cookies.get("userId");
+
+  const handleChangePassword = async () => {
+    try {
+      const result = await axiosClient.patch(`user/profile/${userId}`, form);
+      alert(result.data.msg);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
 
   const handleChangeText = (e) => {
     // console.log(e);
@@ -38,10 +47,15 @@ export default function History() {
               <input
                 type="text"
                 placeholder="Current Password"
-                name="oldPassword"
+                name="noTelp"
+                onChange={handleChangeText}
               />
             </div>
-            <button className="btn btn-primary" type="button">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleChangePassword}
+            >
               Change Password
             </button>
           </form>

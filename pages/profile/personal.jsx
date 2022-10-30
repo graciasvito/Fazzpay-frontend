@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import Layout from "layout";
 import axiosClient from "utils/axios";
-import Image from "next/image";
+// import Image from "next/image";
 import Cookies from "js-cookie";
 import Link from "next/link";
 
@@ -36,20 +36,20 @@ export default function History() {
           <div className="mt-5">
             <div className="card-body shadow-sm">
               <p className="card-title text-secondary">First Name</p>
-              <h5 className="card-text fw-bold">Robert</h5>
+              <h5 className="card-text fw-bold">{data.firstName}</h5>
             </div>
             <div className="card-body mt-3 shadow-sm">
               <p className="card-title text-secondary">Last Name</p>
-              <h5 className="card-text fw-bold">Chandler</h5>
+              <h5 className="card-text fw-bold">{data.lastName}</h5>
             </div>
             <div className="card-body mt-3 shadow-sm">
               <p className="card-title text-secondary">Verified E-mail</p>
-              <h5 className="card-text fw-bold">pewdiepie1@gmail.com</h5>
+              <h5 className="card-text fw-bold">{data.email}</h5>
             </div>
             <div className="card-body mt-3 shadow-sm d-flex justify-content-between">
               <div>
                 <p className="card-title text-secondary">Phone Number</p>
-                <h5 className="card-text fw-bold">+62 813-9387-7946</h5>
+                <h5 className="card-text fw-bold">+62{data.noTelp}</h5>
               </div>
               <Link className="d-flex align-items-center" href="/profile/phone">
                 Manage

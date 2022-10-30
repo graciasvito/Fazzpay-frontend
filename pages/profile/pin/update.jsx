@@ -4,8 +4,11 @@ import Layout from "layout";
 import axiosClient from "utils/axios";
 import { useRouter } from "next/router";
 
-export default function CheckPin() {
+import Cookies from "js-cookie";
+
+export default function History() {
   const router = useRouter();
+  const userId = Cookies.get("userId");
 
   const [pin, setPin] = useState({
     pin1: "",
@@ -41,9 +44,11 @@ export default function CheckPin() {
       allPin += pin[item];
     }
     try {
-      const result = await axiosClient.get(`/user/pin/${allPin}`);
+      const result = await axiosClient.patch(`/user/pin/${userId}`, {
+        pin: allPin,
+      });
       alert(result.data.msg);
-      router.push("/profile/pin/update");
+      router.push("/home");
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -51,13 +56,12 @@ export default function CheckPin() {
 
   return (
     <div className="all-page">
-      <Layout title="Edit PIN">
+      <Layout title="Edit Phone Number">
         <div className="container mt-4 ps-4">
           <div className="w-50">
             <h5 className="fw-bold">Change PIN</h5>
             <p className="text-secondary mt-4">
-              Enter your current 6 digits Fazzpay PIN below to continue to the
-              next steps.
+              Type your new 6 digits security PIN to use in Fazzpay.
             </p>
           </div>
           <form
