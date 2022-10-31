@@ -5,8 +5,23 @@ import Layout from "layout";
 import axiosServer from "utils/axiosServer";
 import Image from "next/image";
 import Cookies from "next-cookies";
+import { useRouter } from "next/router";
 
 export default function History(props) {
+  const router = useRouter();
+  const query = router.query || 1;
+  console.log(query.id);
+
+  const handlePrevPage = () => {
+    const nextPage = Number(query.id) - 1;
+    router.push(`${nextPage}`);
+  };
+
+  const handleNextPage = () => {
+    const nextPage = Number(query.id) + 1;
+    router.push(`${nextPage}`);
+  };
+
   return (
     <div className="all-page">
       <Layout title="History">
@@ -53,14 +68,14 @@ export default function History(props) {
         <div className="d-flex gap-2 justify-content-center w-100 my-5">
           <button
             className="btn btn-primary"
-            // onClick={handlePrevPage}
+            onClick={handlePrevPage}
             // disabled={page === 1 ? true : false}
           >
             &lt;
           </button>
           <button
             className="btn btn-primary"
-            // onClick={handleNextPage}
+            onClick={handleNextPage}
             // disabled={page === event.pagination.totalPage ? true : false}
           >
             &gt;
@@ -72,11 +87,12 @@ export default function History(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { query } = context;
+  const { params } = context;
+  const page = params.id || 1;
 
   const dataCookies = Cookies(context);
   const result = await axiosServer.get(
-    `/transaction/history?page=2&limit=5&filter=YEAR`,
+    `/transaction/history?page=${page}&limit=5&filter=YEAR`,
     {
       headers: {
         Authorization: `Bearer ${dataCookies.token}`,

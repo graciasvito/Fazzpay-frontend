@@ -196,7 +196,7 @@ export default function Home() {
           <div className="col-5 pt-lg-5">
             <div className="d-flex justify-content-around">
               <h5 className="fw-bold">History Transaction</h5>
-              <Link href="/history">
+              <Link href="/history/1">
                 <a className="text-primary">See All</a>
               </Link>
             </div>

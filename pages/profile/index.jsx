@@ -28,23 +28,19 @@ export default function History() {
 
   const handleChangeImage = (e) => {
     const { name, files } = e.target;
-
     setImageForm({ ...imageForm, [name]: files[0] });
     setImage(URL.createObjectURL(files[0]));
   };
 
-  const handleUpdateImage = (e) => {
+  const handleUpdateImage = async (e) => {
     e.preventDefault();
     const formImageData = new FormData();
     for (const image in imageForm) {
       formImageData.append(image, imageForm[image]);
     }
-
-    axiosClient
-      .patch(`user/image/${userId}`, formImageData)
-      .then((response) => {
-        alert(response);
-      });
+    axios.patch(`user/image/${userId}`, formImageData).then((response) => {
+      console.log(response);
+    });
   };
 
   return (
@@ -74,11 +70,11 @@ export default function History() {
                   className="d-none"
                   id="profile-img"
                   name="image"
-                  onChange={image ? handleChangeImage : ""}
+                  onChange={handleChangeImage}
                 />
                 <label
-                  htmlFor="profile-img"
-                  onClick={image ? handleUpdateImage : ""}
+                  htmlFor={image ? "" : "profile-img"}
+                  onChange={image ? handleUpdateImage : ""}
                 >
                   {image ? "Save" : "Edit"}
                 </label>
