@@ -18,7 +18,7 @@ export default function Layout(props) {
       <Header />
 
       <section className="container layout-section-container">
-        <Aside />
+        <Aside title={props.title} />
         <main className="right-section-container ms-sm-5 pb-5">
           {props.children}
         </main>

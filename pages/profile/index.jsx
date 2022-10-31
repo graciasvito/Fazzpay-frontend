@@ -5,8 +5,10 @@ import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function History() {
+  const router = useRouter();
   const [data, setData] = useState([]);
   const [image, setImage] = useState("");
   const [imageForm, setImageForm] = useState({});
@@ -38,9 +40,18 @@ export default function History() {
     for (const image in imageForm) {
       formImageData.append(image, imageForm[image]);
     }
-    axios.patch(`user/image/${userId}`, formImageData).then((response) => {
-      console.log(response);
-    });
+    axiosClient
+      .patch(`user/image/${userId}`, formImageData)
+      .then((response) => {
+        alert(response.data.msg);
+        router.reload();
+      });
+  };
+
+  const handleDeleteImage = async () => {
+    const result = await axiosClient.delete(`user/image/${userId}`);
+    alert(result.data.msg);
+    router.reload();
   };
 
   return (
@@ -48,12 +59,25 @@ export default function History() {
       <Layout title="Profile">
         <div className="d-flex justify-content-center mt-lg-5">
           <div>
+            <div className="d-grid justify-content-end">
+              {" "}
+              <div onClick={handleDeleteImage}>
+                <Image
+                  src="/trash.svg"
+                  width={15}
+                  height={15}
+                  alt="delete Img"
+                />
+              </div>
+            </div>
             <div style={{ width: 80, height: 80 }} className="">
               <Image
                 src={
                   image
                     ? image
-                    : `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${data.image}`
+                    : data.image
+                    ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${data.image}`
+                    : "/person-circle.svg"
                 }
                 width={80}
                 height={80}
@@ -72,13 +96,21 @@ export default function History() {
                   name="image"
                   onChange={handleChangeImage}
                 />
-                <label
-                  htmlFor={image ? "" : "profile-img"}
-                  onChange={image ? handleUpdateImage : ""}
-                >
-                  {image ? "Save" : "Edit"}
-                </label>
+                <label htmlFor={image ? "" : "profile-img"}>Edit</label>
               </div>
+            </div>
+            <div
+              className={`d-grid justify-content-center ${
+                image ? "" : "d-none"
+              }`}
+            >
+              <button
+                type="button"
+                className="btn btn-primary "
+                onClick={handleUpdateImage}
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>

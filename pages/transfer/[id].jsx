@@ -55,7 +55,7 @@ export default function TransferAmount() {
                 <div className="card-body d-flex ">
                   <div style={{ width: 60, height: 60 }} className=" tes">
                     <Image
-                      src="/profile.png"
+                      src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${receive.image}`}
                       width={60}
                       height={60}
                       layout="responsive"

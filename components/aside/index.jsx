@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import axiosClient from "utils/axios";
 
-export default function Aside() {
+export default function Aside(props) {
+  console.log(props.title);
   const [data, setData] = useState();
   const Router = useRouter();
 
@@ -50,7 +51,13 @@ export default function Aside() {
               alt="dashboard"
             />
           </div>
-          <p className="mt-1 ms-3">Dashboard</p>
+          <p
+            className={`mt-1 ms-3 ${
+              props.title === "Home" ? "text-primary" : ""
+            }`}
+          >
+            Dashboard
+          </p>
         </a>
         <a className="d-flex mt-lg-4" onClick={handleTransfer}>
           <div style={{ width: 30, height: 30 }}>
@@ -62,7 +69,13 @@ export default function Aside() {
               alt="dashboard"
             />
           </div>
-          <p className="mt-1 ms-3">Transfer</p>
+          <p
+            className={`mt-1 ms-3 ${
+              props.title === "Transfer" ? "text-primary" : ""
+            }`}
+          >
+            Transfer
+          </p>
         </a>
         <a className="d-flex mt-lg-4">
           <div style={{ width: 30, height: 30 }}>

@@ -47,7 +47,7 @@ export default function History() {
 
   return (
     <div className="all-page">
-      <Layout title="History">
+      <Layout title="Transfer">
         <div className="container mt-5 ">
           <h5 className="ms-4 fw-bold">Search Receiver</h5>
         </div>
@@ -74,7 +74,7 @@ export default function History() {
             <div className="ms-4 d-flex">
               <div style={{ width: 40, height: 40 }} className="mt-2 ">
                 <Image
-                  src="/profile.png"
+                  src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`}
                   width={40}
                   height={40}
                   layout="responsive"
@@ -84,7 +84,7 @@ export default function History() {
               <div className="ms-3">
                 <Link href={`/transfer/${item.id}`}>
                   <div>
-                    <p>{item.firstName}</p>
+                    <p>{`${item.firstName} ${item.lastName}`}</p>
                     <p className="text-secondary">
                       {item.noTelp ? item.noTelp : "-"}
                     </p>

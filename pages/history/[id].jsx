@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 export default function History(props) {
   const router = useRouter();
   const query = router.query || 1;
-
+  console.log(props.pagination);
   const handlePrevPage = () => {
     const nextPage = Number(query.id) - 1;
     router.push(`${nextPage}`);
@@ -68,14 +68,18 @@ export default function History(props) {
           <button
             className="btn btn-primary"
             onClick={handlePrevPage}
-            // disabled={page === 1 ? true : false}
+            disabled={props.pagination.page === 1 ? true : false}
           >
             &lt;
           </button>
           <button
             className="btn btn-primary"
             onClick={handleNextPage}
-            // disabled={page === event.pagination.totalPage ? true : false}
+            disabled={
+              props.pagination.page === props.pagination.totalPage
+                ? true
+                : false
+            }
           >
             &gt;
           </button>
@@ -98,7 +102,6 @@ export async function getServerSideProps(context) {
       },
     }
   );
-  console.log(result.data);
 
   return {
     props: {
