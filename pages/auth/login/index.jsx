@@ -68,17 +68,6 @@ export default function Login() {
             />
           </div>
           <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon2">
-              <div style={{ width: 25, height: 25 }}>
-                <Image
-                  src="/lock.svg"
-                  width={25}
-                  height={25}
-                  layout="responsive"
-                  alt="profile picture"
-                />
-              </div>
-            </span>
             <div className="signup-input-container d-flex mt-4">
               <span className="">
                 <div style={{ width: 20, height: 20 }}>
