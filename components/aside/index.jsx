@@ -25,7 +25,8 @@ export default function Aside(props) {
     // console.log("topup " + data.amount);
     // try {
     const result = await axiosClient.post("transaction/top-up", data);
-    Router.push(result.data.data.redirectUrl);
+    window.open(result.data.data.redirectUrl);
+    Router.reload();
   };
 
   const handleProfile = () => {

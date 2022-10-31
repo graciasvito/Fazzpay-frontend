@@ -196,7 +196,7 @@ export default function Home() {
           <div className="col-5 pt-lg-5">
             <div className="d-flex justify-content-around">
               <h5 className="fw-bold">History Transaction</h5>
-              <Link href="/history/1">
+              <Link href="/history?page=1">
                 <a className="text-primary">See All</a>
               </Link>
             </div>
@@ -210,7 +210,11 @@ export default function Home() {
                     <div className="ms-4 d-flex">
                       <div style={{ width: 40, height: 40 }} className="mt-2 ">
                         <Image
-                          src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`}
+                          src={
+                            item.image
+                              ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`
+                              : "/person-circle.svg"
+                          }
                           width={40}
                           height={40}
                           layout="responsive"

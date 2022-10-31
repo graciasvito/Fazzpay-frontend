@@ -74,7 +74,11 @@ export default function History() {
             <div className="ms-4 d-flex">
               <div style={{ width: 40, height: 40 }} className="mt-2 ">
                 <Image
-                  src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`}
+                  src={
+                    item.image
+                      ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`
+                      : "/person-circle.svg"
+                  }
                   width={40}
                   height={40}
                   layout="responsive"

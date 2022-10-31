@@ -5,16 +5,64 @@ import Layout from "layout";
 import axiosServer from "utils/axiosServer";
 import Image from "next/image";
 import Cookies from "next-cookies";
+import { useRouter } from "next/router";
 
 export default function History(props) {
+  const router = useRouter();
+  const { query } = router || 1;
+  const page = query.page;
+  console.log(query);
+  console.log(props.pagination);
+
+  const handlePrevPage = () => {
+    const nextPage = Number(page) - 1;
+    router.push(`/history?page=${nextPage}`);
+  };
+
+  const handleNextPage = () => {
+    const nextPage = Number(page) + 1;
+    router.push(`/history?page=${nextPage}`);
+  };
+
   return (
     <div className="all-page">
       <Layout title="History">
         <div className="container mt-3 d-flex justify-content-between">
           <h5 className="ms-4 fw-bold">Transaction History</h5>
-          <button type="button" className="btn btn-outline-secondary me-4">
+          <button
+            type="button"
+            className="btn btn-outline-secondary me-4 dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             --Select Filter--
           </button>
+          <ul className="dropdown-menu">
+            <li>
+              <a
+                className="dropdown-item"
+                href={`history?page=${page}&filter=WEEK`}
+              >
+                Week
+              </a>
+            </li>
+            <li>
+              <a
+                className="dropdown-item"
+                href={`history?page=${page}&filter=MONTH`}
+              >
+                Month
+              </a>
+            </li>
+            <li>
+              <a
+                className="dropdown-item"
+                href={`history?page=${page}&filter=YEAR`}
+              >
+                Year
+              </a>
+            </li>
+          </ul>
         </div>
         {props.listUser.length > 0 ? (
           props.listUser.map((item) => (
@@ -22,7 +70,11 @@ export default function History(props) {
               <div className="ms-4 d-flex">
                 <div style={{ width: 40, height: 40 }} className="mt-2 ">
                   <Image
-                    src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`}
+                    src={
+                      item.image
+                        ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${item.image}`
+                        : "/person-circle.svg"
+                    }
                     width={40}
                     height={40}
                     layout="responsive"
@@ -53,15 +105,19 @@ export default function History(props) {
         <div className="d-flex gap-2 justify-content-center w-100 my-5">
           <button
             className="btn btn-primary"
-            // onClick={handlePrevPage}
-            // disabled={page === 1 ? true : false}
+            onClick={handlePrevPage}
+            disabled={props.pagination.page === 1 ? true : false}
           >
             &lt;
           </button>
           <button
             className="btn btn-primary"
-            // onClick={handleNextPage}
-            // disabled={page === event.pagination.totalPage ? true : false}
+            onClick={handleNextPage}
+            disabled={
+              props.pagination.page === props.pagination.totalPage
+                ? true
+                : false
+            }
           >
             &gt;
           </button>
@@ -73,10 +129,14 @@ export default function History(props) {
 
 export async function getServerSideProps(context) {
   const { query } = context;
+  const page = query.page || 1;
+  const filter = query.filter || "YEAR";
+
+  console.log(query);
 
   const dataCookies = Cookies(context);
   const result = await axiosServer.get(
-    `/transaction/history?page=2&limit=5&filter=YEAR`,
+    `/transaction/history?page=${page}&limit=5&filter=${filter}`,
     {
       headers: {
         Authorization: `Bearer ${dataCookies.token}`,

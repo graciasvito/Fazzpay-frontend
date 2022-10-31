@@ -11,7 +11,8 @@ import moment from "moment/moment";
 
 export default function History() {
   const Router = useRouter();
-
+  const { query } = Router;
+  console.log(query);
   const form = Router.query;
 
   const [data, setData] = useState([]);
