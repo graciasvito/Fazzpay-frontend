@@ -15,16 +15,28 @@ export default function History() {
   const form = Router.query;
 
   const [data, setData] = useState([]);
+  const [receive, setReceive] = useState([]);
 
   const userId = Cookies.get("userId");
 
+  const receiverId = form.receiverId;
+
   useEffect(() => {
-    dataUser();
+    dataUser(), dataReceiverById();
   }, []);
 
   const dataUser = async () => {
     const result = await axiosClient.get(`user/profile/${userId}`);
     setData(result.data.data);
+  };
+
+  const dataReceiverById = async () => {
+    try {
+      const result = await axiosClient.get(`user/profile/${receiverId}`);
+      setReceive(result.data.data);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
   };
 
   const [pin, setPin] = useState({
@@ -55,7 +67,8 @@ export default function History() {
   };
 
   const handleTransfer = async () => {
-    const result = await axiosClient.post("transaction/transfer", form);
+    await axiosClient.post("transaction/transfer", form);
+
     Router.push("/transfer/status");
   };
 
@@ -71,7 +84,8 @@ export default function History() {
       alert(result.data.msg);
       handleTransfer();
     } catch (error) {
-      alert(error.response.data);
+      console.log(error.response.data);
+      alert(error.response.data.msg);
     }
   };
 
@@ -94,8 +108,10 @@ export default function History() {
                 </div>
 
                 <div className="ms-3">
-                  <p className="card-text fw-bold">Robert</p>
-                  <p className="card-title text-secondary">+62 813-8492-9994</p>
+                  <p className="card-text fw-bold">{receive.firstName}</p>
+                  <p className="card-title text-secondary">
+                    +62{receive.noTelp}
+                  </p>
                 </div>
               </div>
             </div>
@@ -121,7 +137,9 @@ export default function History() {
             <div className="card-body mt-3 shadow-sm d-flex justify-content-between">
               <div>
                 <p className="card-title text-secondary">Notes</p>
-                <h5 className="card-text fw-bold">{form.notes}</h5>
+                <h5 className="card-text fw-bold">
+                  {form.notes ? form.notes : ""}
+                </h5>
               </div>
             </div>
           </div>
