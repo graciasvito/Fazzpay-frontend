@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 export default function History(props) {
   const router = useRouter();
   const query = router.query || 1;
-  console.log(query.id);
 
   const handlePrevPage = () => {
     const nextPage = Number(query.id) - 1;
@@ -99,6 +98,7 @@ export async function getServerSideProps(context) {
       },
     }
   );
+  console.log(result.data);
 
   return {
     props: {

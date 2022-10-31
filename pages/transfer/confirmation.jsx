@@ -67,9 +67,10 @@ export default function History() {
   };
 
   const handleTransfer = async () => {
-    await axiosClient.post("transaction/transfer", form);
-
-    Router.push("/transfer/status");
+    try {
+      await axiosClient.post("transaction/transfer", form);
+      Router.push("/transfer/status");
+    } catch (error) {}
   };
 
   const handlePINSubmit = async (e) => {

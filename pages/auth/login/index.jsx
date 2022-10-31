@@ -54,22 +54,15 @@ export default function Login() {
           </p>
         </div>
         <form>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">
-              <div style={{ width: 25, height: 25 }}>
-                <Image
-                  src="/mail.svg"
-                  width={25}
-                  height={25}
-                  layout="responsive"
-                  alt="profile picture"
-                />
+          <div className="signup-input-container d-flex mt-4">
+            <span className="">
+              <div style={{ width: 20, height: 20 }}>
+                <Image src="/mail.svg" width={20} height={20} alt="" />
               </div>
             </span>
             <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your e-mail"
+              type="email"
+              placeholder="Enter your email"
               name="email"
               onChange={handleChangeText}
             />
@@ -86,10 +79,14 @@ export default function Login() {
                 />
               </div>
             </span>
-            <div className="auth-input-container">
+            <div className="signup-input-container d-flex mt-4">
+              <span className="">
+                <div style={{ width: 20, height: 20 }}>
+                  <Image src="/lock.svg" width={20} height={20} alt="" />
+                </div>
+              </span>
               <input
                 type={showPassword ? "text" : "password"}
-                className="form-control"
                 placeholder="Enter your password"
                 name="password"
                 onChange={handleChangeText}

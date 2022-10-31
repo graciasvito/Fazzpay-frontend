@@ -4,8 +4,10 @@ import Layout from "layout";
 // import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function History() {
+  const router = useRouter();
   //   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
 
