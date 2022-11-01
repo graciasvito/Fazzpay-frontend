@@ -5,7 +5,7 @@ import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import Chart from "components/chart";
+// import Chart from "components/chart";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -194,7 +194,7 @@ export default function Home() {
                   </h5>
                 </div>
               </div>
-              <Chart />
+              {/* <Chart /> */}
             </div>
           </div>
           <div className="col-5 pt-lg-5">
