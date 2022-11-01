@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 export default function History(props) {
   const router = useRouter();
   const query = router.query || 1;
-  console.log(props.pagination);
+  props.pagination;
   const handlePrevPage = () => {
     const nextPage = Number(query.id) - 1;
     router.push(`${nextPage}`);

@@ -154,7 +154,7 @@ export async function getServerSideProps(context) {
 
   const filter = query.filter || "YEAR";
 
-  console.log(query);
+  query;
 
   const dataCookies = Cookies(context);
   const result = await axiosServer.get(

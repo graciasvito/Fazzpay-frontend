@@ -40,7 +40,7 @@ export default function TransferAmount() {
   };
 
   const handleChangeText = (e) => {
-    // console.log(e);
+    //  (e);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 

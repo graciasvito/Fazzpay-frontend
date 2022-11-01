@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   const handleTopup = async () => {
-    // console.log("topup " + data.amount);
+    //  ("topup " + data.amount);
     // try {
     const result = await axiosClient.post("transaction/top-up", data);
     Router.push(result.data.data.redirectUrl);
@@ -52,7 +52,7 @@ export default function Home() {
       const result = await axiosClient.get(`dashboard/${userId}`);
       setDashboard(result.data.data);
     } catch (error) {
-      console.log(error);
+      error;
     }
   };
 

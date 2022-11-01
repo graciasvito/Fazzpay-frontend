@@ -14,7 +14,7 @@ export default function HomeSSR(props) {
 
   const useNavigateSearch = (data) => {
     let query = { ...props.params, ...data };
-    console.log(query);
+    query;
     if (query.page === 1) {
       delete query.page;
     }
@@ -59,7 +59,7 @@ export default function HomeSSR(props) {
 export async function getServerSideProps(context) {
   let params = context.query;
   params.page = params.page ? +params.page : 1;
-  console.log(params.page);
+  params.page;
   const dataCookies = Cookies(context);
   const result = await axiosServer.get(
     "/user?page=1&limit=5&search=&sort=firstName ASC",

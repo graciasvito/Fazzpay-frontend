@@ -22,7 +22,7 @@ export default function Aside(props) {
   };
 
   const handleTopup = async () => {
-    // console.log("topup " + data.amount);
+    //  ("topup " + data.amount);
     // try {
     const result = await axiosClient.post("transaction/top-up", data);
     window.open(result.data.data.redirectUrl);

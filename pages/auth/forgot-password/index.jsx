@@ -18,12 +18,12 @@ export default function CreatePIN() {
       //   proses kondisi pengecekan pin jika ada akan diarahkan ke home jika tidak ada akan diarahkan ke create pin
       router.push("/login");
     } catch (error) {
-      console.log(error);
+      error;
     }
   };
 
   const handleChangeText = (e) => {
-    // console.log(e);
+    //  (e);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 

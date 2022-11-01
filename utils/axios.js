@@ -32,7 +32,7 @@ axiosApiIntances.interceptors.response.use(
     // Do something with response error
 
     if (error.response.status === 403) {
-      console.log(error);
+      error;
       Cookies.remove("token");
       window.location.href = "/auth/login";
     }

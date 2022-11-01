@@ -18,7 +18,7 @@ export default function History() {
   const transferNotes = Cookies.get("notes");
   const transferReceiver = Cookies.get("receiver");
   const dateTime = Cookies.get("time");
-  console.log(transferAmount, transferNotes, transferReceiver);
+  transferAmount, transferNotes, transferReceiver;
 
   useEffect(() => {
     dataUser(), dataReceiverById();

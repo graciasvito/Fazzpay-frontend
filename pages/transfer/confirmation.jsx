@@ -92,7 +92,7 @@ export default function Confirmation() {
       alert(result.data.msg);
       handleTransfer();
     } catch (error) {
-      console.log(error.response.data);
+      error.response.data;
       alert(error.response.data.msg);
     }
   };

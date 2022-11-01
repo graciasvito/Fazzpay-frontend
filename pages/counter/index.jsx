@@ -5,7 +5,7 @@ import { incrementCounter, decrementCounter } from "stores/action/counter";
 
 export default function Counter() {
   const counterData = useSelector((state) => state.counter);
-  console.log(counterData);
+  counterData;
   const dispatch = useDispatch();
 
   const [counter, setCounter] = useState(0);

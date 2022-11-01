@@ -51,7 +51,7 @@ export default function HandleChart() {
   axiosClient
     .get("/dashboard/fce5d0fa-4ba0-468c-98fa-d757bef2e89b")
     .then((res) => {
-      console.log(res);
+      res;
     });
   return (
     <div className="container text-center">

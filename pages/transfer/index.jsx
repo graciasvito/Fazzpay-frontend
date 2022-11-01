@@ -21,7 +21,7 @@ export default function Transfer(props) {
       router.push(`/transfer?search=${form.firstName}`);
     }
   };
-  console.log(form);
+  form;
   return (
     <div className="all-page">
       <Layout title="Transfer">

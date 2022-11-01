@@ -48,12 +48,12 @@ export const dataDashboard = async () => {
     return item.day;
   });
 
-  console.log(income, expense);
+  income, expense;
   data.datasets[0].data = income;
   data.datasets[1].data = expense;
   data.labels = day;
 
-  console.log(data.datasets[0].data);
+  data.datasets[0].data;
 };
 
 export const data = {
