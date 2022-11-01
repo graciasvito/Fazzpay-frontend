@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,7 +14,7 @@ export default function Aside(props) {
   };
 
   const handleTransfer = () => {
-    Router.push("/transfer/search");
+    Router.push("/transfer");
   };
 
   const handleChangeText = (e) => {
@@ -35,6 +36,12 @@ export default function Aside(props) {
   const handleLogout = async () => {
     const result = await axiosClient.post("auth/logout");
     alert(result.data.msg);
+    Cookies.remove("token");
+    Cookies.remove("userId");
+    localStorage.removeItem("refreshtoken");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+
     Router.push("/auth/login");
   };
 

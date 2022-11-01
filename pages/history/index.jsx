@@ -7,10 +7,12 @@ import Image from "next/image";
 import Cookies from "next-cookies";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import qs from "query-string";
 
 export default function History(props) {
   const router = useRouter();
-  const { query } = router || 1;
+
+  const query = props.params;
   const page = query.page;
 
   const handlePrevPage = () => {
@@ -146,7 +148,10 @@ export default function History(props) {
 
 export async function getServerSideProps(context) {
   const { query } = context;
-  const page = query.page || 1;
+  let params = query;
+  params.page = params.page ? +params.page : 1;
+  const page = params.page;
+
   const filter = query.filter || "YEAR";
 
   console.log(query);
@@ -165,6 +170,7 @@ export async function getServerSideProps(context) {
     props: {
       listUser: result.data.status === 200 ? result.data.data : [],
       pagination: result.data.status === 200 ? result.data.pagination : {},
+      params: params,
     }, // will be passed to the page component as props
   };
 }

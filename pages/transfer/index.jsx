@@ -1,50 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Layout from "layout";
-import axiosClient from "utils/axios";
 
+import axiosServer from "utils/axiosServer";
 import Image from "next/image";
+import Cookies from "next-cookies";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function History() {
-  const Router = useRouter();
-  const [data, setData] = useState([]);
+export default function Transfer(props) {
+  const router = useRouter();
   const [form, setForm] = useState([]);
 
-  const searchName = form.firstName;
-
-  useEffect(() => {
-    getDataUser();
-  }, []);
-
-  useEffect(() => {
-    getDataUser();
-  }, [searchName]);
-
-  const getDataUser = async () => {
-    try {
-      const result = await axiosClient.get(
-        `user?page=1&limit=4&search=${
-          searchName === undefined ? "" : searchName
-        }&sort=firstName ASC`
-      );
-
-      setData(result.data.data);
-    } catch (error) {}
-  };
+  const query = props.params;
 
   const handleChangeText = (e) => {
-    e.preventDefault;
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleKeypress = (e) => {
-    //it triggers by pressing the enter key
     if (e.key === "Enter") {
+      e.preventDefault;
+      setForm({ ...form, [e.target.name]: e.target.value });
+      router.push(`/transfer?search=${form.firstName}`);
     }
   };
-
+  console.log(form);
   return (
     <div className="all-page">
       <Layout title="Transfer">
@@ -61,11 +38,10 @@ export default function History() {
             type="text"
             placeholder="Search receiver here"
             name="firstName"
-            onChange={handleChangeText}
-            onKeyPress={handleKeypress}
+            onKeyPress={handleChangeText}
           />
         </div>
-        {data.map((item) => (
+        {props.listUser.map((item) => (
           <div
             className="d-flex mt-5 justify-content-between"
             key={item}
@@ -98,12 +74,32 @@ export default function History() {
             </div>
           </div>
         ))}{" "}
-        {/* {data.map((item) => (
-          <div className="card my-3" key={item}>
-            <h1>{item.id}</h1>
-          </div>
-        ))}{" "} */}
       </Layout>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { query } = context;
+  let params = query;
+  params.search = params.search ? params.search : "";
+  const search = params.search;
+
+  const dataCookies = Cookies(context);
+  const result = await axiosServer.get(
+    `user?page=1&limit=4&search=${search}&sort=firstName ASC`,
+    {
+      headers: {
+        Authorization: `Bearer ${dataCookies.token}`,
+      },
+    }
+  );
+
+  return {
+    props: {
+      listUser: result.data.status === 200 ? result.data.data : [],
+      pagination: result.data.status === 200 ? result.data.pagination : {},
+      params: params,
+    }, // will be passed to the page component as props
+  };
 }

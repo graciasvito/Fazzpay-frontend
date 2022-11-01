@@ -55,7 +55,11 @@ export default function TransferAmount() {
                 <div className="card-body d-flex ">
                   <div style={{ width: 60, height: 60 }}>
                     <Image
-                      src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${receive.image}`}
+                      src={
+                        receive.image
+                          ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${receive.image}`
+                          : "/person-circle.svg"
+                      }
                       width={60}
                       height={60}
                       layout="responsive"

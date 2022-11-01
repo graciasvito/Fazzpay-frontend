@@ -37,42 +37,18 @@ export default function History() {
     }
   };
   const handleHome = () => {
-    Cookies.remove("transferAmount", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    Cookies.remove("transferNotes", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    Cookies.remove("transferReceiver", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    Cookies.remove("dateTime", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
+    Cookies.remove("transferAmount");
+    Cookies.remove("transferNotes");
+    Cookies.remove("transferReceiver");
+    Cookies.remove("dateTime");
     router.push("/home");
   };
   const handleTryAgain = () => {
-    Cookies.remove("transferAmount", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    Cookies.remove("transferNotes", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    Cookies.remove("transferReceiver", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    Cookies.remove("dateTime", {
-      path: "/transfer/confirmation",
-      domain: "http://localhost:3000/",
-    });
-    router.push("/transfer/search");
+    Cookies.remove("transferAmount");
+    Cookies.remove("transferNotes");
+    Cookies.remove("transferReceiver");
+    Cookies.remove("dateTime");
+    router.push("/transfer");
   };
 
   return (

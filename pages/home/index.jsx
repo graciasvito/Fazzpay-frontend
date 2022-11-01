@@ -5,6 +5,7 @@ import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import Chart from "components/chart";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -41,7 +42,7 @@ export default function Home() {
       const result = await axiosClient.get(
         "/transaction/history?page=1&limit=4&filter=YEAR"
       );
-      console.log(result);
+
       setHistory(result.data.data);
     } catch (error) {}
   };
@@ -69,7 +70,7 @@ export default function Home() {
             </div>
             <div className="summary-button d-flex align-items-center">
               <div>
-                <Link href="/transfer/search">
+                <Link href="/transfer">
                   <button
                     type="button"
                     className="btn summary-button text-white mb-2"
@@ -166,31 +167,34 @@ export default function Home() {
         </div>
         <div className="d-flex mt-lg-2 ">
           <div className="col-7 container pt-lg-5">
-            <div className="d-flex">
-              <div className="col-6">
-                <Image
-                  src="/arrow-green.svg"
-                  width={30}
-                  height={30}
-                  alt="income arrow"
-                />
-                <p>Income</p>
-                <h5 className="fw-bold">
-                  Rp{new Intl.NumberFormat().format(dashboard.totalIncome)}
-                </h5>
+            <div className=" ">
+              <div className="d-flex">
+                <div className="col-6">
+                  <Image
+                    src="/arrow-green.svg"
+                    width={30}
+                    height={30}
+                    alt="income arrow"
+                  />
+                  <p>Income</p>
+                  <h5 className="fw-bold">
+                    Rp{new Intl.NumberFormat().format(dashboard.totalIncome)}
+                  </h5>
+                </div>
+                <div className="col-6">
+                  <Image
+                    src="/arrow-red.svg"
+                    width={30}
+                    height={30}
+                    alt="expense arrow"
+                  />
+                  <p>Expense</p>
+                  <h5 className="fw-bold">
+                    Rp{new Intl.NumberFormat().format(dashboard.totalExpense)}{" "}
+                  </h5>
+                </div>
               </div>
-              <div className="col-6">
-                <Image
-                  src="/arrow-red.svg"
-                  width={30}
-                  height={30}
-                  alt="expense arrow"
-                />
-                <p>Expense</p>
-                <h5 className="fw-bold">
-                  Rp{new Intl.NumberFormat().format(dashboard.totalExpense)}{" "}
-                </h5>
-              </div>
+              <Chart />
             </div>
           </div>
           <div className="col-5 pt-lg-5">
