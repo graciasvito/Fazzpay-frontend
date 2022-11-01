@@ -134,7 +134,7 @@ export default function Login() {
             type="button"
             onClick={handleSubmit}
           >
-            Login
+            Sign Up
           </button>
         </div>
         <div className="form-check d-flex justify-content-center">

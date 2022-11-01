@@ -6,13 +6,12 @@ import axiosServer from "utils/axiosServer";
 import Image from "next/image";
 import Cookies from "next-cookies";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function History(props) {
   const router = useRouter();
   const { query } = router || 1;
   const page = query.page;
-  console.log(query);
-  console.log(props.pagination);
 
   const handlePrevPage = () => {
     const nextPage = Number(page) - 1;
@@ -39,28 +38,46 @@ export default function History(props) {
           </button>
           <ul className="dropdown-menu">
             <li>
-              <a
+              <Link
                 className="dropdown-item"
-                href={`history?page=${page}&filter=WEEK`}
+                href={{
+                  pathname: "/history",
+                  query: {
+                    page: page,
+                    filter: "WEEK",
+                  },
+                }}
               >
                 Week
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="dropdown-item"
-                href={`history?page=${page}&filter=MONTH`}
+                href={{
+                  pathname: "/history",
+                  query: {
+                    page: page,
+                    filter: "MONTH",
+                  },
+                }}
               >
                 Month
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 className="dropdown-item"
-                href={`history?page=${page}&filter=YEAR`}
+                href={{
+                  pathname: "/history",
+                  query: {
+                    page: page,
+                    filter: "YEAR",
+                  },
+                }}
               >
                 Year
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

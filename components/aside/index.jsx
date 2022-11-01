@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import axiosClient from "utils/axios";
 
 export default function Aside(props) {
-  console.log(props.title);
   const [data, setData] = useState();
   const Router = useRouter();
 

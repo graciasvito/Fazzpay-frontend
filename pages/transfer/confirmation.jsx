@@ -5,15 +5,19 @@ import Layout from "layout";
 import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import Link from "next/link";
+
 import { useRouter } from "next/router";
 import moment from "moment/moment";
 
-export default function History() {
+export default function Confirmation() {
   const Router = useRouter();
   const { query } = Router;
-  console.log(query);
-  const form = Router.query;
+
+  const form = query;
+  Cookies.set("amount", form.amount);
+  Cookies.set("notes", form.notes);
+  Cookies.set("receiver", form.receiverId);
+  Cookies.set("time", moment().format("LLL"));
 
   const [data, setData] = useState([]);
   const [receive, setReceive] = useState([]);
@@ -70,8 +74,10 @@ export default function History() {
   const handleTransfer = async () => {
     try {
       await axiosClient.post("transaction/transfer", form);
-      Router.push("/transfer/status");
-    } catch (error) {}
+      Router.push("/transfer/status/success");
+    } catch (error) {
+      Router.push("/transfer/status/failed");
+    }
   };
 
   const handlePINSubmit = async (e) => {
@@ -93,15 +99,19 @@ export default function History() {
 
   return (
     <div className="all-page">
-      <Layout title="Profile">
+      <Layout title="Transfer Confirmation">
         <div className="container mt-4 ps-4">
           <div className="w-50">
             <h5 className="fw-bold">Transfer To</h5>
             <div className="container mt-4">
               <div className="card-body d-flex ">
-                <div style={{ width: 60, height: 60 }} className=" tes">
+                <div style={{ width: 60, height: 60 }}>
                   <Image
-                    src="/profile.png"
+                    src={
+                      receive.image
+                        ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${receive.image}`
+                        : "/person-circle.svg"
+                    }
                     width={60}
                     height={60}
                     layout="responsive"
@@ -151,6 +161,7 @@ export default function History() {
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#transfer"
+              aria-label="Close"
             >
               Continue
             </button>

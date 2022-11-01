@@ -53,7 +53,7 @@ export default function TransferAmount() {
               <h5 className="fw-bold">Transfer Money</h5>
               <div className="container mt-4">
                 <div className="card-body d-flex ">
-                  <div style={{ width: 60, height: 60 }} className=" tes">
+                  <div style={{ width: 60, height: 60 }}>
                     <Image
                       src={`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${receive.image}`}
                       width={60}

@@ -12,7 +12,17 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const userId = Cookies.get("userId");
+  const checkPIN = async () => {
+    try {
+      await axiosClient.get("/user/pin/12345");
+    } catch (error) {
+      if (error.response.data.msg === "Please set your pin") {
+        router.push("/auth/create-pin");
+      } else {
+        router.push("/home");
+      }
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -20,9 +30,10 @@ export default function Login() {
       Cookies.set("token", result.data.data.token);
       Cookies.set("userId", result.data.data.id);
       alert(result.data.msg);
+      checkPIN();
 
       //   proses kondisi pengecekan pin jika ada akan diarahkan ke home jika tidak ada akan diarahkan ke create pin
-      router.push("/home");
+      // router.push("/home");
     } catch (error) {
       alert(error.response.data.msg);
     }
