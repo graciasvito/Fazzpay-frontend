@@ -6,7 +6,7 @@ import axiosClient from "utils/axios";
 import Cookies from "js-cookie";
 import Link from "next/link";
 
-export default function History() {
+export default function Personal() {
   const [data, setData] = useState([]);
 
   const userId = Cookies.get("userId");

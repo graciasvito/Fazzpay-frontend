@@ -4,17 +4,20 @@ import Layout from "layout";
 import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
-export default function History() {
+export default function Phone() {
+  const router = useRouter();
   //   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
 
   const userId = Cookies.get("userId");
 
-  const handleChangePassword = async () => {
+  const handleChangePhone = async () => {
     try {
       const result = await axiosClient.patch(`user/profile/${userId}`, form);
       alert(result.data.msg);
+      router.reload();
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -54,9 +57,9 @@ export default function History() {
             <button
               className="btn btn-primary"
               type="button"
-              onClick={handleChangePassword}
+              onClick={handleChangePhone}
             >
-              Change Password
+              Change Phone Number
             </button>
           </form>
         </div>

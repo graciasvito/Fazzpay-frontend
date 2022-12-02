@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function History() {
+export default function Profile() {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [image, setImage] = useState("");

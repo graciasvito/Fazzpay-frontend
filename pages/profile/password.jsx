@@ -5,7 +5,7 @@ import axiosClient from "utils/axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
 
-export default function History() {
+export default function Password() {
   // const [data, setData] = useState([]);
   const [form, setForm] = useState({});
 
