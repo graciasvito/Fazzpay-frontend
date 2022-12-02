@@ -54,6 +54,18 @@ export default function Profile() {
     router.reload();
   };
 
+  const handleLogout = async () => {
+    const result = await axiosClient.post("auth/logout");
+    alert(result.data.msg);
+    Cookies.remove("token");
+    Cookies.remove("userId");
+    localStorage.removeItem("refreshtoken");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+
+    router.push("/auth/login");
+  };
+
   return (
     <div className="all-page">
       <Layout title="Profile">
@@ -166,7 +178,11 @@ export default function Profile() {
                   </div>
                 </button>
               </Link>
-              <button className="btn btn-color fw-bold" type="button">
+              <button
+                className="btn btn-color fw-bold"
+                type="button"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>
