@@ -168,7 +168,13 @@ export default function Aside(props) {
                 alt="dashboard"
               />
             </div>
-            <p className="mt-1 ms-3">Profile</p>
+            <p
+              className={`mt-1 ms-3 ${
+                props.title === "Profile" ? "text-primary" : ""
+              }`}
+            >
+              Profile
+            </p>
           </div>
         </a>
       </div>
