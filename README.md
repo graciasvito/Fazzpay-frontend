@@ -1,6 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align='center'>Fazzpay</h1>
+  <p align="center">
+    <a href="https://vitofazzpay.vercel.app/">View Demo Frontend</a>
+    ·
+    <a href="https://github.com/graciasvito/Fazzpay-frontend/issues">Report Bug</a>
+  </p>
+
+## About The Project
+
+ <p>
+ <strong>Fazzpay</strong> is a e-wallet that provides transactional activities which simplified user financial needs. It has features such as top up balance, check transaction history, send money to other user, and user is be able to update their profile.
+ </p>
+
+## Built With
+
+<div>
+
+[![Next](https://img.shields.io/badge/Next.Js-v12.3.1-blue)](https://nextjs.org/) [![Bootstrap](https://img.shields.io/badge/Bootstrap-v5.2.x-blue)](https://github.com/react-bootstrap/react-bootstrap) [![Axios](https://img.shields.io/badge/Axios-v1.1.x-blue)](https://axios-http.com/) [![Redux](https://img.shields.io/badge/Redux-v4.2.x-blue)](https://redux.js.org/) <br/> other packages see file `package.json`
+
+## Requirements
+
+1. <a href="https://nodejs.org/en/download/">Node Js</a>
+2. Node_modules `npm install` or `yarn install` or `pnpm install`
+3. Backend API Vito Event Organizer [`here`](https://github.com/graciasvito/Vito-Event-Organizer-Backend)
 
 ## Getting Started
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
@@ -26,6 +50,14 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Acknowledgements
+
+- [Next.js](https://nextjs.org/)
+- [Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
+- [Axios](https://axios-http.com/)
+- [Redux](https://redux.js.org/)
+
 
 ## Deploy on Vercel
 
